@@ -1,0 +1,19 @@
+{
+    "name": "vitorcorreia/api-transfer",
+    "description": "Estou usando o Composer para gerenciar as classes da minha API",
+    "license": "MIT",
+    "version": "1.0.0",
+    "autoload": {
+        "psr-4": {
+            "Api\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Vitor correia",
+            "email": "Vitorcorreia.git@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
