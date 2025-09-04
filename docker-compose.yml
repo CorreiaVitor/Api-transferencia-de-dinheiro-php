@@ -1,0 +1,32 @@
+version: "3.9"
+
+services:
+  # Serviço da aplicação (PHP + Apache já configurados na sua imagem)
+  app:
+    image: correiavitor43/web-server:5.1          # Imagem do Docker Hub | Imagem personalizada criada para fins didáticos
+    container_name: projeto_api                   # Nome do container (opcional)
+    restart: unless-stopped                       # Reinicia se cair
+    ports:
+      - "8010:80"                                 # Porta local -> porta do container
+    volumes:
+      - ./:/var/www/html/                         # Código local sincronizado com o container    
+    depends_on:
+      - db                                        # Sobe depois do banco de dados
+  # Serviço do banco de dados
+  db:
+    image: mysql:8.4                             # Imagem oficial do MySQL
+    container_name: banco_mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root                   # Senha root
+      MYSQL_DATABASE: db_financial_api            # Banco inicial
+      MYSQL_USER: user                            # Usuário
+      MYSQL_PASSWORD: ssvq                        # Senha do usuário
+    ports:
+      - "8011:3306"                               # Porta do MySQL
+    volumes:
+      - db_data:/var/lib/mysql                    # Volume persistente
+
+#  Definição dos volumes (persistem os dados do DB mesmo que o container caia)
+volumes:
+  db_data:
